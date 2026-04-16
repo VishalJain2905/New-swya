@@ -1,0 +1,133 @@
+.review-business {
+  display: flex;
+  flex-direction: column;
+  gap: var(--review-stack-gap);
+  min-height: 0;
+}
+
+/* Footer spacing comes from .review-business gap only */
+.review-business .form-footer {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.review-business__title {
+  margin: 0;
+  font-size: var(--font-size-review-title);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-dark);
+}
+
+.review-business__row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--review-block-gap);
+}
+
+.review-business__logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.review-business__meta {
+  min-width: 0;
+}
+
+.review-business__name {
+  margin: 0;
+  margin-bottom: 4px;
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.review-business__created {
+  margin: 0;
+  margin-bottom: 4px;
+  font-size: var(--font-size-body);
+  color: var(--color-text-muted);
+}
+
+.review-business__verify-row {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-body);
+  color: var(--color-text-body);
+}
+
+.review-business__verify--yes {
+  color: var(--color-verified);
+  font-weight: 600;
+}
+
+.review-business__verify--no {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.review-business__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-info-badge);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.review-business__hr {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.review-business__profile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.review-business__subtitle {
+  margin: 0;
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.review-business__profile-text {
+  margin: 0;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text-body);
+}
+
+.review-business__caution {
+  margin: 0;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted);
+}
+
+.review-business__link {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: inherit;
+  color: var(--color-primary);
+  font-family: inherit;
+}
+
+.review-business__link:hover {
+  text-decoration: underline;
+}

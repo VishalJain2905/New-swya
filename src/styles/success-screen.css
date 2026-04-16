@@ -1,0 +1,25 @@
+.success-screen {
+  padding: var(--success-padding-y) var(--success-padding-x);
+  text-align: center;
+}
+
+.success-screen__emoji {
+  margin-bottom: 20px;
+  font-size: var(--success-emoji-size);
+  line-height: 1;
+}
+
+.success-screen__title {
+  margin: 0;
+  margin-bottom: 8px;
+  font-size: var(--font-size-heading);
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.success-screen__text {
+  margin: 0;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted);
+}

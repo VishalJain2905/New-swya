@@ -1,0 +1,134 @@
+/* Step 1 — body fills space above footer; footer sits on bottom of card */
+.invite-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.invite-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 auto;
+  min-height: 0;
+  width: 100%;
+}
+
+.invite-card__hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.invite-card__logo {
+  width: var(--hero-logo-size);
+  height: var(--hero-logo-size);
+  border-radius: var(--hero-logo-radius);
+  object-fit: cover;
+  margin-bottom: var(--hero-logo-mb);
+}
+
+.invite-card__title {
+  margin: 0;
+  margin-bottom: var(--hero-title-mb);
+  font-size: var(--font-size-heading);
+  font-weight: 700;
+  color: var(--color-text-dark);
+  line-height: 1.2;
+}
+
+.invite-card__intro {
+  margin-top: var(--hero-intro-mt);
+  width: 100%;
+  max-width: 100%;
+  align-self: stretch;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text-body);
+}
+
+.invite-card__intro p {
+  margin: 0;
+  text-align: start;
+}
+
+.invite-card__intro p:first-child {
+  margin-bottom: var(--hero-intro-gap);
+}
+
+.invite-card__intro strong {
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.invite-card__hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.invite-card__hr--after-hero {
+  margin-top: var(--invite-card-hero-hr-gap);
+  margin-bottom: var(--invite-card-between-hrs-gap);
+  margin-inline: 0;
+}
+
+.invite-card__hr--form {
+  margin-top: var(--invite-card-between-hrs-gap);
+  margin-bottom: var(--form-divider-my);
+  margin-inline: 0;
+}
+
+.invite-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--invite-card-between-hrs-gap);
+}
+
+.invite-card__instruction {
+  margin: 0;
+  font-size: var(--font-size-body);
+  color: var(--color-text-body);
+  line-height: var(--line-height-body);
+}
+
+.invite-card__name-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--form-fields-gap);
+}
+
+.invite-card__legal {
+  margin: 0;
+  font-size: var(--font-size-legal);
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted);
+}
+
+.invite-card__legal:first-of-type {
+  margin-bottom: var(--invite-legal-mb);
+}
+
+.invite-card__link {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.invite-card__link:hover {
+  text-decoration: underline;
+}
+
+.invite-card__text-button {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: var(--font-size-legal);
+  color: var(--color-primary);
+}
+
+.invite-card__text-button:hover {
+  text-decoration: underline;
+}

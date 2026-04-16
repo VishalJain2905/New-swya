@@ -1,0 +1,162 @@
+/* Invite page shell: header, main band, card shell, footer */
+.invite-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--page-background);
+}
+
+.invite-page__header {
+  flex-shrink: 0;
+  background: #fff;
+  padding: var(--header-py) var(--header-px);
+}
+
+.invite-page__wordmark {
+  height: var(--logo-height);
+  width: auto;
+  display: block;
+}
+
+.invite-page__main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  margin-block: var(--main-margin-block);
+}
+
+.invite-page__main-band {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--main-py) + var(--main-mt)) var(--main-px)
+    calc(var(--main-py) + var(--main-mb));
+}
+
+/* Shared card chrome — width matches step 1; height mode differs by modifier */
+.invite-page__card {
+  box-sizing: border-box;
+  width: var(--card-width);
+  max-width: min(100%, var(--card-width));
+  padding: var(--card-pt) var(--card-px) var(--card-pb);
+  border-radius: var(--card-radius);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--card-shadow);
+  background: var(--color-bg-card);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Step 1 only: exact fixed dimensions */
+.invite-page__card--fixed {
+  height: var(--card-height);
+  min-height: 0;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+/* Steps 2, 3, success: height from content, capped for viewport, centered in main band */
+.invite-page__card--auto {
+  height: auto;
+  min-height: auto;
+  flex-shrink: 1;
+  max-height: calc(100vh - 10rem);
+  overflow-y: auto;
+  align-self: center;
+}
+
+/* Step 2 (Review business): same inset on all sides (overrides shared --card-pt / --card-pb) */
+.invite-page__card--review {
+  padding: var(--card-px);
+}
+
+@media (max-width: 620px) {
+  .invite-page__card--fixed {
+    width: min(var(--card-width), 100%);
+    height: min(var(--card-height), calc(100vh - 12rem));
+  }
+
+  .invite-page__card--auto {
+    width: min(var(--card-width), 100%);
+    max-height: calc(100vh - 9rem);
+  }
+}
+
+.invite-page__footer {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  margin-top: var(--footer-mt);
+  margin-bottom: var(--footer-mb);
+}
+
+/*
+  Footer column (3 rows):
+  1) full-width hr
+  2) nav links | English (UK) — space-between
+  3) Meta © line
+*/
+.invite-page__footer-inner {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--footer-width);
+  min-height: var(--footer-height);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--footer-gutter);
+  padding-right: var(--footer-gutter);
+  padding-bottom: var(--footer-pb);
+  display: flex;
+  flex-direction: column;
+  gap: var(--footer-column-gap);
+}
+
+.invite-page__footer-rule {
+  flex-shrink: 0;
+  margin: 0;
+  width: 100%;
+  height: 0;
+  border: 0;
+  border-top: 1px solid #cbd2d9;
+}
+
+.invite-page__footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+
+.invite-page__footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--footer-nav-gap);
+}
+
+.invite-page__footer-link {
+  font-size: var(--font-size-footer);
+  font-weight: 400;
+  color: var(--color-footer-text);
+}
+
+.invite-page__footer-lang {
+  flex-shrink: 0;
+  font-size: var(--font-size-footer);
+  color: var(--color-footer-text);
+}
+
+.invite-page__footer-copy {
+  margin: 0;
+  width: 100%;
+  font-size: var(--font-size-copyright);
+  color: var(--color-footer-text);
+}

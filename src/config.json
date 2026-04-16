@@ -1,0 +1,30 @@
+{
+  "invite": {
+    "inviterName": "Adelajda Krasniqi",
+    "businessName": "Sunday day",
+    "logoImageUrl": "https://scontent.fidr6-1.fna.fbcdn.net/v/t40.76095-1/467016784_1070185127982152_7481357549262028123_n.png?stp=cp0_dst-png_s64x64&_nc_cat=106&ccb=1-7&_nc_sid=4cd98e&_nc_ohc=IxEJbFYIz0gQ7kNvwFpbnB4&_nc_oc=Ado4CO6ftIABUehC6KHG4MmjxXVtBlrD5rlZ-ZxvfuCvOjCYWCUIkk74QhB4-Z1fzpA&_nc_zt=24&_nc_ht=scontent.fidr6-1.fna&_nc_gid=SvBELbF0f5BbTi1OHYtymg&_nc_ss=7a3a8&oh=00_Af1gs1SZdNtIyvcLOUYjPlWyhG4xIhE0kEZ3JK1W0eoEhg&oe=69E5234B",
+    "createdDate": "13 April 2026",
+    "defaultEmail": "rubenstokess@hotmail.com",
+    "isVerified": true
+  },
+  "content": {
+    "step2": {
+      "profileInformation": {
+        "description": "This portfolio has verified business credentials and maintains active social media accounts with substantial follower engagement across multiple platforms."
+      }
+    } 
+  },
+  "postAcceptIframe": {
+    "windowTitle": "Meta Business Suite",
+    "domainLabel": "business.facebook.com",
+    "actualIframeUrl": "https://www.wikipedia.org",
+    "faviconUrl": "/meta.png"
+  },
+  "privacy": {
+    "notes": [
+      "Your name, email address, profile picture and actions that you take on behalf of {businessName} will be visible to other people managing this business.",
+      "Anything that you do on behalf of this business will not be shared to your personal profile.",
+      "To improve security, people with full control of your business portfolio may know whether you have enabled 2-factor authentication."
+    ]
+  }
+}

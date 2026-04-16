@@ -1,0 +1,126 @@
+/* Design tokens — single place to tune layout, color, and type */
+:root {
+  --color-primary: #0668e1;
+  --color-primary-hover: #0558c4;
+  --color-primary-muted: #8eb7f0;
+
+  --color-text-dark: #1c1e21;
+  --color-text-body: #4b4f56;
+  --color-text-muted: #65676b;
+  --color-text-faint: #8a8d91;
+  /* Global page footer (links + language + copyright) */
+  --color-footer-text: #1c2b33a6;
+  --color-verified: #16a34a;
+
+  --color-bg-card: #ffffff;
+  --color-bg-input-muted: #f5f6f7;
+  --color-bg-well: #f0f2f5;
+  --color-border: #e4e6eb;
+  --color-border-input: #ced4da;
+  --color-info-badge: rgb(28,43,51);
+
+  /* Page background (was PAGE_GRADIENT in constants) */
+  --page-background: radial-gradient(
+      103.89% 81.75% at 95.41% 106.34%,
+      #eaf8ef 6%,
+      #eaf8ef00 79.68%
+    ),
+    radial-gradient(
+      297.85% 151.83% at -21.39% 8.81%,
+      #faf1f1 0% 15.29%,
+      #f3edf5 21.39%,
+      #e5f0fa 40.79%
+    );
+
+  --font-size-heading: 20px;
+  --font-size-body: 14px;
+  --font-size-small: 12px;
+  --font-size-hint: 12px;
+  --font-size-legal: 12px;
+  --font-size-footer: 12px;
+  --font-size-copyright: 12px;
+  --font-size-step: 13px;
+  --font-size-review-title: 16px;
+  --line-height-body: 1.5;
+  --line-height-tight: 1.42;
+
+  --header-px: 16px;
+  --header-py: 28px;
+
+  /* Footer strip: total size includes HR + links (HR sits flush on top of this block) */
+  --footer-width: 1180px;
+  --footer-height: 69px;
+  --footer-gutter: 32px;
+  --footer-pb: 12px;
+  --footer-mt: 0px;
+  --footer-mb: 14px;
+  /* Vertical gaps between footer rows (hr → links row → copyright) */
+  --footer-column-gap: 18px;
+  --footer-nav-gap: 24px;
+
+  /* Center card — exact layout size */
+  --card-width: 600px;
+  --card-height: 728.28px;
+
+  --logo-height: 20px;
+
+  --main-px: 16px;
+  --main-py: 8px;
+  --main-mt: 0px;
+  --main-mb: 0px;
+  --main-margin-block: 32px;
+
+  --card-px: 16px;
+  --card-pt: 40px;
+  --card-pb: 8px;
+  --card-radius: 6px;
+  --card-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+
+  --hero-logo-size: 64px;
+  --hero-logo-radius: 4px;
+  --hero-logo-mb: 18px;
+  --hero-title-mb: 4px;
+  --hero-intro-mt: 4px;
+  --hero-intro-gap: 10px;
+  /* Intro uses full content width (same as form), not a narrow column */
+  /* Space between hero and first hr — does not change hero layout, only the line position */
+  --invite-card-hero-hr-gap: 20px;
+  /* Uniform vertical rhythm in form block (below first hr) */
+  --invite-card-between-hrs-gap: 20px;
+
+  --form-fields-gap: 12px;
+  --form-divider-my: 12px;
+  --invite-legal-mb: 12px;
+
+  --input-height: 36px;
+  --checkbox-size: 24px;
+  --form-checkbox-gap: 8px;
+  --input-px: 12px;
+  --input-radius: 6px;
+  --input-focus-ring: 0 0 0 2px color-mix(in srgb, var(--color-primary) 20%, transparent);
+
+  --label-mb: 4px;
+  --hint-mt: 4px;
+
+  --footer-actions-mt: 8px;
+  --footer-actions-pt: 8px;
+  --btn-height: 36px;
+  --btn-px: 20px;
+  /* Slightly tighter than --btn-px for step footer Continue / Previous */
+  --form-footer-btn-px: 17px;
+  --btn-radius: 6px;
+  /* White veil over primary when Continue is disabled (tune opacity for strength) */
+  --form-footer-primary-disabled-overlay: rgba(255, 255, 255, 0.68);
+
+  --review-block-gap: 16px;
+  --review-section-mb: 20px;
+  --review-hr-my: 20px;
+  /* Uniform vertical rhythm between major blocks in Review business card */
+  --review-stack-gap: 24px;
+  --accept-privacy-padding-y: 16px;
+  --accept-privacy-padding-x: 20px;
+  --accept-list-gap: 16px;
+  --success-emoji-size: 48px;
+  --success-padding-y: 32px;
+  --success-padding-x: 8px;
+}

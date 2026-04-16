@@ -1,0 +1,17 @@
+@import "./styles/tokens.css";
+@import "./styles/reset.css";
+@import "./styles/invite-page.css";
+@import "./styles/invite-card.css";
+@import "./styles/form-fields.css";
+@import "./styles/form-footer.css";
+@import "./styles/review-business.css";
+@import "./styles/accept-invitation.css";
+@import "./styles/success-screen.css";
+@import "./styles/post-accept-modal.css";
+@import "./styles/business-avatar.css";
+@import "./styles/meta-logo.css";
+
+body {
+  font-family: "Optimistic 95", system-ui, sans-serif;
+  color: var(--color-text-body);
+}
