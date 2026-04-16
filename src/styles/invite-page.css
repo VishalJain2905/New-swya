@@ -2,8 +2,7 @@
 .invite-page {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
   background: var(--page-background);
 }
 
@@ -70,20 +69,65 @@
   align-self: center;
 }
 
-/* Step 2 (Review business): same inset on all sides (overrides shared --card-pt / --card-pb) */
-.invite-page__card--review {
-  padding: var(--card-px);
+/* Steps 2–3 (Review business, Accept invitation): inset + extra vs step 1 */
+.invite-page__card--step-body {
+  padding: calc(var(--card-px) + var(--review-card-height-bump) + var(--review-step-body-padding-extra))
+      calc(var(--card-px) + var(--review-step-body-padding-extra))
+    calc(var(--review-card-padding-bottom) + var(--review-card-height-bump) + var(--review-step-body-padding-extra))
+      calc(var(--card-px) + var(--review-step-body-padding-extra));
 }
 
 @media (max-width: 620px) {
+  .invite-page__header {
+    padding: 16px var(--header-px);
+  }
+
+  .invite-page__main {
+    margin-block: 12px;
+  }
+
+  .invite-page__main-band {
+    align-items: flex-start;
+    padding-left: var(--main-px);
+    padding-right: var(--main-px);
+  }
+
+  .invite-page__card {
+    width: 100%;
+    max-width: min(100%, var(--card-width));
+    padding: var(--card-mobile-pt) var(--card-mobile-px) var(--card-mobile-pb);
+  }
+
+  /* Step 1: content height like desktop reference — no fixed shell on small screens */
   .invite-page__card--fixed {
-    width: min(var(--card-width), 100%);
-    height: min(var(--card-height), calc(100vh - 12rem));
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow-y: visible;
   }
 
   .invite-page__card--auto {
-    width: min(var(--card-width), 100%);
-    max-height: calc(100vh - 9rem);
+    width: 100%;
+    max-width: min(100%, var(--card-width));
+    max-height: none;
+  }
+
+  .invite-page__card--step-body {
+    padding: calc(var(--card-mobile-px) + var(--review-card-height-bump) + var(--review-step-body-padding-extra))
+        calc(var(--card-mobile-px) + var(--review-step-body-padding-extra))
+      calc(var(--review-card-padding-bottom) + var(--review-card-height-bump) + var(--review-step-body-padding-extra))
+        calc(var(--card-mobile-px) + var(--review-step-body-padding-extra));
+  }
+
+  .invite-page__footer-inner {
+    padding-left: 16px;
+    padding-right: 16px;
+    min-height: auto;
+  }
+
+  .invite-page__footer-nav {
+    gap: 10px 14px;
   }
 }
 

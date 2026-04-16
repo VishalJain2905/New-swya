@@ -10,7 +10,7 @@
   padding-top: var(--footer-actions-pt);
 }
 
-/* Step 1 (no Previous): step centered on full row width; Continue stays right */
+/* Step 1 (no Previous): “1 of 3” centered in row; Continue on the right */
 .form-footer--single {
   position: relative;
   justify-content: flex-end;
@@ -22,6 +22,7 @@
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
+  text-align: center;
 }
 
 .form-footer--single .form-footer__btn {
@@ -50,12 +51,12 @@
 }
 
 .form-footer__btn--primary {
-  background: var(--color-primary);
+  background: var(--form-footer-primary);
   color: #fff;
 }
 
 .form-footer__btn--primary:hover:not(:disabled) {
-  background: var(--color-primary-hover);
+  background: var(--form-footer-primary-hover);
 }
 
 .form-footer__btn--primary:disabled {
@@ -64,7 +65,7 @@
       var(--form-footer-primary-disabled-overlay),
       var(--form-footer-primary-disabled-overlay)
     ),
-    var(--color-primary);
+    var(--form-footer-primary);
   cursor: not-allowed;
 }
 
@@ -82,4 +83,46 @@
 .form-footer__icon {
   flex-shrink: 0;
   vertical-align: middle;
+}
+
+/* Narrow widths: no overlapping step + actions */
+@media (max-width: 540px) {
+  .form-footer--single {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    position: static;
+    justify-content: flex-start;
+  }
+
+  .form-footer--single .form-footer__step {
+    position: static;
+    transform: none;
+    order: 1;
+    text-align: center;
+  }
+
+  .form-footer--single .form-footer__btn {
+    order: 2;
+    align-self: flex-end;
+  }
+
+  .form-footer:not(.form-footer--single) {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+
+  .form-footer:not(.form-footer--single) .form-footer__btn--secondary {
+    order: 1;
+  }
+
+  .form-footer:not(.form-footer--single) .form-footer__btn--primary {
+    order: 2;
+  }
+
+  .form-footer:not(.form-footer--single) .form-footer__step {
+    order: 3;
+    flex: 1 1 100%;
+    text-align: center;
+  }
 }

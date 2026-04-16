@@ -23,7 +23,7 @@
 }
 
 .accept-invitation__muted {
-  color: var(--color-text-muted);
+  color: var(--color-text-body);
 }
 
 .accept-invitation__strong {
@@ -47,7 +47,7 @@
 .accept-invitation__privacy {
   margin-bottom: var(--review-section-mb);
   border-radius: 8px;
-  background: var(--color-bg-well);
+  background: #cbd2d9;
   padding: var(--accept-privacy-padding-y) var(--accept-privacy-padding-x);
 }
 
@@ -64,7 +64,6 @@
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
   color: var(--color-text-body);
-  padding-left: 4px;
 }
 
 .accept-invitation__terms {

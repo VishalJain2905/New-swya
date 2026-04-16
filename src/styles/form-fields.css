@@ -14,6 +14,7 @@
 
 .text-input--muted {
   background: var(--color-bg-input-muted);
+  color: #1c2b3399;
 }
 
 .text-input:focus {
@@ -22,24 +23,77 @@
 }
 
 .form-checkbox {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--form-checkbox-gap);
   cursor: pointer;
 }
 
+/* Hit target + focus; visual box is .form-checkbox__box */
 .form-checkbox__input {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
   width: var(--checkbox-size);
   height: var(--checkbox-size);
-  flex-shrink: 0;
-  border-radius: 4px;
-  border: 1px solid var(--color-border-input);
-  accent-color: var(--color-primary);
+  margin: 0;
+  opacity: 0;
+  z-index: 2;
   cursor: pointer;
 }
 
+.form-checkbox__box {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  border-radius: 4px;
+  border: 1px solid var(--form-checkbox-border);
+  background-color: var(--form-checkbox-bg);
+  pointer-events: none;
+  display: grid;
+  place-content: center;
+  transition: border-color 0.12s ease;
+}
+
+/* Blue tick on white background (mask + fill color) */
+.form-checkbox__box::after {
+  content: "";
+  width: var(--form-checkbox-tick-size);
+  height: var(--form-checkbox-tick-size);
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+  background-color: var(--form-checkbox-tick);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.form-checkbox__input:checked + .form-checkbox__box {
+  background-color: var(--form-checkbox-bg);
+  border-color: var(--form-checkbox-border);
+}
+
+.form-checkbox__input:checked + .form-checkbox__box::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.form-checkbox__input:focus-visible + .form-checkbox__box {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 .form-checkbox__label {
-  font-size: 13px;
+  font-size: 14px;
   line-height: var(--line-height-tight);
   color: black;
 }
@@ -54,22 +108,55 @@
   gap: 6px;
   font-size: var(--font-size-body);
   font-weight: 700;
-  color: var(--color-text-body);
+  color: #1c2b33;
   cursor: pointer;
 }
 
-.field-label__badge {
+/* Meta sprite “i” (info) — matches business.facebook.com asset slice */
+.info-icon-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--color-info-badge);
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
+  padding: 2px;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 4px;
   flex-shrink: 0;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.info-icon-btn:hover {
+  opacity: 0.85;
+}
+
+.info-icon-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.field-label__info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.field-label__info-sprite {
+  display: block;
+  width: 12px;
+  height: 12px;
+  background-color: #1c2b33;
+  -webkit-mask-image: url("https://static.xx.fbcdn.net/rsrc.php/v4/yv/r/MWBYUK4LXsJ.png");
+  mask-image: url("https://static.xx.fbcdn.net/rsrc.php/v4/yv/r/MWBYUK4LXsJ.png");
+  -webkit-mask-size: 21px 3045px;
+  mask-size: 21px 3045px;
+  -webkit-mask-position: 0 -2824px;
+  mask-position: 0 -2824px;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 
 .field-label__hint {

@@ -69,10 +69,12 @@ export default function InviteCard({ onNext }: InviteCardProps) {
           <TextInput id="email" type="email" value={email} onChange={setEmail} variant="muted" />
         </div>
 
-        <Checkbox id="marketing" checked={marketing} onChange={setMarketing}>
-          Receive marketing messages (e.g. email, social) from Meta related to its business, products and services.
-          Withdraw your consent and unsubscribe at any time.
-        </Checkbox>
+        <div className="invite-card__marketing">
+          <Checkbox id="marketing" checked={marketing} onChange={setMarketing}>
+            Receive marketing messages (e.g. email, social) from Meta related to its business, products and services.
+            Withdraw your consent and unsubscribe at any time.
+          </Checkbox>
+        </div>
         </div>
 
         <hr className="invite-card__hr invite-card__hr--form" />

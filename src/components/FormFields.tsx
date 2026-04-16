@@ -1,4 +1,4 @@
-import type { ChangeEvent, ReactNode } from "react";
+import { forwardRef, type ChangeEvent, type ReactNode } from "react";
 
 interface TextInputProps {
   id: string;
@@ -43,10 +43,37 @@ export function Checkbox({ id, checked, onChange, children }: CheckboxProps) {
         onChange={(e) => onChange(e.target.checked)}
         className="form-checkbox__input"
       />
+      <span className="form-checkbox__box" aria-hidden="true" />
       <span className="form-checkbox__label">{children}</span>
     </label>
   );
 }
+
+/** Same Meta sprite “i” as FieldLabel — use for inline info triggers (e.g. step 2 verification). */
+interface InfoIconButtonProps {
+  onClick: () => void;
+  "aria-label": string;
+  className?: string;
+}
+
+export const InfoIconButton = forwardRef<HTMLButtonElement, InfoIconButtonProps>(function InfoIconButton(
+  { onClick, "aria-label": ariaLabel, className },
+  ref
+) {
+  return (
+    <button
+      ref={ref}
+      type="button"
+      className={["info-icon-btn", className].filter(Boolean).join(" ")}
+      onClick={onClick}
+      aria-label={ariaLabel}
+    >
+      <span className="field-label__info" aria-hidden="true">
+        <span className="field-label__info-sprite" />
+      </span>
+    </button>
+  );
+});
 
 interface FieldLabelProps {
   htmlFor: string;
@@ -60,7 +87,11 @@ export function FieldLabel({ htmlFor, children, info, hint }: FieldLabelProps) {
     <div className="field-label">
       <label htmlFor={htmlFor} className="field-label__text">
         {children}
-        {info && <span className="field-label__badge">i</span>}
+        {info && (
+          <span className="field-label__info" aria-hidden="true">
+            <span className="field-label__info-sprite" />
+          </span>
+        )}
       </label>
       {hint && <p className="field-label__hint">{hint}</p>}
     </div>

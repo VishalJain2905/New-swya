@@ -5,7 +5,7 @@
   --color-primary-muted: #8eb7f0;
 
   --color-text-dark: #1c1e21;
-  --color-text-body: #4b4f56;
+  --color-text-body: #1c2b33;
   --color-text-muted: #65676b;
   --color-text-faint: #8a8d91;
   /* Global page footer (links + language + copyright) */
@@ -33,6 +33,7 @@
     );
 
   --font-size-heading: 20px;
+  --font-size-heading-mobile: 18px;
   --font-size-body: 14px;
   --font-size-small: 12px;
   --font-size-hint: 12px;
@@ -60,65 +61,96 @@
 
   /* Center card — exact layout size */
   --card-width: 600px;
-  --card-height: 728.28px;
+  --card-height: 728px;
 
   --logo-height: 20px;
 
-  --main-px: 16px;
+  --main-px: 8px;
   --main-py: 8px;
   --main-mt: 0px;
   --main-mb: 0px;
-  --main-margin-block: 32px;
+  --main-margin-block: 16px;
 
-  --card-px: 16px;
-  --card-pt: 40px;
-  --card-pb: 8px;
-  --card-radius: 6px;
+  --card-px: 12px;
+  --card-pt: 32px;
+  --card-pb: 10px;
+  /* Narrow viewports: matches Meta mobile invite density */
+  --card-mobile-px: 12px;
+  --card-mobile-pt: 24px;
+  --card-mobile-pb: 16px;
+  --card-radius: 8px;
   --card-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
 
   --hero-logo-size: 64px;
   --hero-logo-radius: 4px;
-  --hero-logo-mb: 18px;
-  --hero-title-mb: 4px;
-  --hero-intro-mt: 4px;
-  --hero-intro-gap: 10px;
+  --hero-logo-mb: 20px;
+  --hero-title-mb: 12px;
+  --hero-intro-mt: 0px;
+  --hero-intro-gap: 12px;
   /* Intro uses full content width (same as form), not a narrow column */
-  /* Space between hero and first hr — does not change hero layout, only the line position */
-  --invite-card-hero-hr-gap: 20px;
-  /* Uniform vertical rhythm in form block (below first hr) */
-  --invite-card-between-hrs-gap: 20px;
+  /* Space between hero block and first divider */
+  --invite-card-hero-hr-gap: 22px;
+  /* Space below first divider before the form copy */
+  --invite-card-after-first-hr-gap: 20px;
+  /* Vertical rhythm inside the form stack (instruction → fields → checkbox) */
+  --invite-card-form-gap: 18px;
+  /* Pulls marketing checkbox up vs flex gap alone (tighter under email field) */
+  --invite-card-marketing-margin-top: -5px;
+  /* Space above the second divider (after checkbox) */
+  --invite-card-before-legal-hr-gap: 22px;
 
-  --form-fields-gap: 12px;
-  --form-divider-my: 12px;
-  --invite-legal-mb: 12px;
+  --form-fields-gap: 16px;
+  --form-divider-my: 16px;
+  --invite-legal-mb: 10px;
 
   --input-height: 36px;
   --checkbox-size: 24px;
+  /* Checkbox: white box always; checked state shows tick only (see form-fields.css) */
+  --form-checkbox-bg: #ffffff;
+  --form-checkbox-tick: var(--form-footer-primary);
+  /* Tick fills the box with minimal inset (24px outer → ~22px inner after border) */
+  --form-checkbox-tick-size: 20px;
+  --form-checkbox-border: var(--color-border-input);
   --form-checkbox-gap: 8px;
   --input-px: 12px;
   --input-radius: 6px;
   --input-focus-ring: 0 0 0 2px color-mix(in srgb, var(--color-primary) 20%, transparent);
 
-  --label-mb: 4px;
-  --hint-mt: 4px;
+  --label-mb: 5px;
+  --hint-mt: 2px;
 
-  --footer-actions-mt: 8px;
-  --footer-actions-pt: 8px;
+  --footer-actions-mt: 16px;
+  --footer-actions-pt: 16px;
   --btn-height: 36px;
   --btn-px: 20px;
   /* Slightly tighter than --btn-px for step footer Continue / Previous */
   --form-footer-btn-px: 17px;
   --btn-radius: 6px;
+  /* Continue / primary in step footer only (links & inputs keep --color-primary) */
+  --form-footer-primary: rgb(10, 120, 190);
+  --form-footer-primary-hover: color-mix(in srgb, var(--form-footer-primary) 88%, #000);
   /* White veil over primary when Continue is disabled (tune opacity for strength) */
   --form-footer-primary-disabled-overlay: rgba(255, 255, 255, 0.68);
 
   --review-block-gap: 16px;
   --review-section-mb: 20px;
   --review-hr-my: 20px;
-  /* Uniform vertical rhythm between major blocks in Review business card */
+  /* Uniform vertical rhythm between major blocks in Review business card (body) */
   --review-stack-gap: 24px;
+  /* Extra space between page title and logo row (on top of --review-stack-gap feel) */
+  --review-title-to-row-add: 6px;
+  /* “Profile information” heading → body copy */
+  --review-profile-inner-gap: 4px;
+  /* Space between caution copy and step footer */
+  --review-before-footer-gap: 20px;
+  /* Card chrome: less inset under the footer than on top/sides */
+  --review-card-padding-bottom: 6px;
+  /* Slight extra vertical breathing room for the review card only */
+  --review-card-height-bump: 4px;
+  /* Extra inset on steps 2–3 card shell only (see invite-page__card--step-body) */
+  --review-step-body-padding-extra: 4px;
   --accept-privacy-padding-y: 16px;
-  --accept-privacy-padding-x: 20px;
+  --accept-privacy-padding-x: 12px;
   --accept-list-gap: 16px;
   --success-emoji-size: 48px;
   --success-padding-y: 32px;

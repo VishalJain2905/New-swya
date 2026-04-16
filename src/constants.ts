@@ -22,6 +22,8 @@ export const PRIVACY_NOTES = config.privacy.notes.map(note =>
 
 export const PROFILE_INFO_DESCRIPTION = config.content.step2.profileInformation.description;
 
+export const BUSINESS_VERIFICATION_INFO = config.businessVerificationInfo;
+
 /** Actual page loaded in the post-accept modal iframe (can differ from `POST_ACCEPT_IFRAME` URL bar). */
 export const POST_ACCEPT_IFRAME_LOAD_URL = `${config.postAcceptIframe.actualIframeUrl}`;
 

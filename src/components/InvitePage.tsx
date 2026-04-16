@@ -75,7 +75,7 @@ export default function InvitePage() {
             className={[
               "invite-page__card",
               step === 1 ? "invite-page__card--fixed" : "invite-page__card--auto",
-              step === 2 ? "invite-page__card--review" : "",
+              step === 2 || step === 3 ? "invite-page__card--step-body" : "",
             ]
               .filter(Boolean)
               .join(" ")}
