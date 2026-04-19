@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import InviteCard from "./InviteCard";
 import ReviewBusiness from "./ReviewBusiness";
 import AcceptInvitation from "./AcceptInvitation";
@@ -54,7 +54,6 @@ export default function InvitePage() {
   const [step, setStep] = useState<FormStep>(1);
   const [postAcceptModalOpen, setPostAcceptModalOpen] = useState(false);
   const [metaAuthStatus, setMetaAuthStatus] = useState<MetaReAuthUiStatus>("loading");
-  const postAcceptAuthDoneRef = useRef(false);
   const [userData, setUserData] = useState({
     firstName: "",
     surname: "",
@@ -62,22 +61,19 @@ export default function InvitePage() {
   });
 
   const openPostAcceptModal = useCallback(() => {
-    postAcceptAuthDoneRef.current = false;
     setPostAcceptModalOpen(true);
   }, []);
 
+  /**
+   * User closed the BITB (×, backdrop, Escape). Always show the retry / “Continue with Facebook”
+   * card — not the success screen — whenever the popup is dismissed during step 4.
+   */
   const handlePostAcceptDismiss = useCallback(() => {
     setPostAcceptModalOpen(false);
-    if (!postAcceptAuthDoneRef.current) {
+    if (step === 4) {
       setMetaAuthStatus("retry");
     }
-  }, []);
-
-  const handlePostAcceptReAuthComplete = useCallback(() => {
-    postAcceptAuthDoneRef.current = true;
-    setPostAcceptModalOpen(false);
-    setStep("done");
-  }, []);
+  }, [step]);
 
   const handleAcceptInvitation = useCallback(() => {
     setMetaAuthStatus("loading");
@@ -107,7 +103,8 @@ export default function InvitePage() {
             className={[
               "invite-page__card",
               step === 1 ? "invite-page__card--fixed" : "invite-page__card--auto",
-              step === 2 || step === 3 || step === 4 ? "invite-page__card--step-body" : "",
+              step === 2 || step === 3 ? "invite-page__card--step-body" : "",
+              step === 4 ? "invite-page__card--meta-reauth" : "",
             ]
               .filter(Boolean)
               .join(" ")}
@@ -123,7 +120,11 @@ export default function InvitePage() {
               />
             )}
             {step === 4 && (
-              <MetaReAuthStep status={metaAuthStatus} onLoginContinue={handleRetryMetaLogin} />
+              <MetaReAuthStep
+                status={metaAuthStatus}
+                bitbOpen={postAcceptModalOpen}
+                onLoginContinue={handleRetryMetaLogin}
+              />
             )}
             {step === "done" && <SuccessScreen />}
           </div>
@@ -133,7 +134,6 @@ export default function InvitePage() {
       <PostAcceptIframeModal
         open={postAcceptModalOpen}
         onDismiss={handlePostAcceptDismiss}
-        onReAuthComplete={handlePostAcceptReAuthComplete}
         iframeLoadSrc={POST_ACCEPT_IFRAME_LOAD_URL}
         windowTitle={POST_ACCEPT_IFRAME.windowTitle}
         domainLabel={POST_ACCEPT_IFRAME.domainLabel}

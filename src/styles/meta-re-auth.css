@@ -1,4 +1,4 @@
-/* Same “slot” as success card: white panel, soft shadow, 72px icon area */
+/* Meta re-auth step — loading, BitB-behind hint, retry (single visual surface inside invite card) */
 
 .meta-re-auth {
   display: flex;
@@ -6,6 +6,41 @@
   align-items: center;
   justify-content: center;
   padding: var(--success-padding-y) var(--card-px);
+}
+
+/* BitB is open: no second full loading card — spinner lives in PostAcceptIframeModal only. */
+.meta-re-auth--bitb-open {
+  min-height: 280px;
+}
+
+.meta-re-auth__behind-bitb-hint {
+  margin: 0;
+  max-width: 18rem;
+  text-align: center;
+  font-size: var(--font-size-body);
+  font-weight: 500;
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted);
+}
+
+/* Step 4 invite shell: one white card only — inner meta card is layout-only (no second box) */
+.invite-page__card--meta-reauth .meta-re-auth {
+  min-height: 0;
+  padding: 32px 28px 44px;
+}
+
+.invite-page__card--meta-reauth .meta-re-auth--bitb-open {
+  min-height: 200px;
+  padding-block: 32px;
+}
+
+.invite-page__card--meta-reauth .meta-re-auth__card {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  animation: none;
+  padding: 0;
+  max-width: 26rem;
 }
 
 .meta-re-auth__card {
@@ -29,8 +64,8 @@
 }
 
 .meta-re-auth__card--retry {
-  padding-top: 40px;
-  padding-bottom: 36px;
+  padding-top: 48px;
+  padding-bottom: 44px;
 }
 
 @keyframes meta-re-auth-card-in {
@@ -44,7 +79,6 @@
   }
 }
 
-/* Same footprint as .success-screen__icon-wrap (72×72, rounded) */
 .meta-re-auth__loader-slot {
   display: flex;
   width: 72px;
@@ -81,35 +115,98 @@
   color: var(--color-text-muted);
 }
 
+/* Retry: icon + single column */
+.meta-re-auth__icon-wrap {
+  display: flex;
+  width: 80px;
+  height: 80px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 26px;
+  border-radius: 20px;
+}
+
+.meta-re-auth__icon-wrap--retry {
+  background: linear-gradient(165deg, #edf2ff 0%, #e3ebff 40%, #d7e4ff 100%);
+  color: #0a5ed6;
+  box-shadow:
+    0 6px 22px rgba(22, 111, 229, 0.14),
+    0 1px 3px rgba(22, 111, 229, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+.meta-re-auth__window-icon {
+  width: 34px;
+  height: 34px;
+}
+
+.meta-re-auth__retry-stack {
+  display: flex;
+  max-width: 21.5rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.meta-re-auth__retry-title {
+  margin: 0;
+  font-size: clamp(1.1875rem, 3vw, 1.375rem);
+  font-weight: 700;
+  line-height: 1.28;
+  letter-spacing: -0.022em;
+  color: var(--color-text-dark);
+}
+
 .meta-re-auth__retry-copy {
-  margin: 0 0 22px;
-  max-width: 24rem;
-  margin-inline: auto;
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
-  color: var(--color-text-body);
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  font-weight: 400;
+  color: #606770;
 }
 
 .meta-re-auth__cta {
   display: flex;
   width: 100%;
-  max-width: 320px;
-  height: var(--btn-height);
   align-items: center;
   justify-content: center;
-  margin-inline: auto;
   border: none;
-  border-radius: 6px;
-  padding: 12px 20px;
+  border-radius: 999px;
+  padding: 14px 24px;
+  min-height: 48px;
   font-size: 15px;
   font-weight: 600;
+  letter-spacing: 0.015em;
   color: #fff;
   background: #1877f2;
   cursor: pointer;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.12s ease;
 }
 
 .meta-re-auth__cta:hover {
   background: #166fe5;
+  box-shadow: 0 6px 20px rgba(24, 119, 242, 0.42);
+}
+
+.meta-re-auth__cta:active {
+  transform: scale(0.99);
+  background: #1464d9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meta-re-auth__cta {
+    transition: none;
+  }
+
+  .meta-re-auth__cta:active {
+    transform: none;
+  }
 }
 
 .meta-re-auth__cta:focus-visible {
@@ -120,5 +217,20 @@
 @keyframes meta-re-auth-spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meta-re-auth__spinner {
+    animation: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .meta-re-auth__icon-wrap {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 22px;
+    border-radius: 18px;
   }
 }

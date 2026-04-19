@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef } from "react";
 
 const PLACEHOLDER_SRC_DOC = `<!DOCTYPE html><html><head><meta charset="utf-8"/><style>
 body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
@@ -7,13 +7,9 @@ p{max-width:28rem;padding:1.5rem;line-height:1.5;font-size:14px;text-align:cente
 code{font-size:12px;background:#e8eaed;padding:2px 6px;border-radius:4px;}
 </style></head><body><p>Set <code>postAcceptIframe.actualIframeUrl</code> in <code>config.json</code> to your real Meta / OAuth URL (do not use Wikipedia for demos).</p></body></html>`;
 
-/** Minimum time to show the re-auth loading state after the iframe has loaded (ms). */
-const RE_AUTH_MIN_MS = 2200;
-
 export interface PostAcceptIframeModalProps {
   open: boolean;
   onDismiss: () => void;
-  onReAuthComplete: () => void;
   iframeLoadSrc: string;
   windowTitle: string;
   domainLabel: string;
@@ -23,7 +19,6 @@ export interface PostAcceptIframeModalProps {
 export default function PostAcceptIframeModal({
   open,
   onDismiss,
-  onReAuthComplete,
   iframeLoadSrc,
   windowTitle,
   domainLabel,
@@ -32,31 +27,7 @@ export default function PostAcceptIframeModal({
   const titleId = useId();
   const closeBtnRef = useRef<HTMLButtonElement>(null);
   const onDismissRef = useRef(onDismiss);
-  const onReAuthCompleteRef = useRef(onReAuthComplete);
   onDismissRef.current = onDismiss;
-  onReAuthCompleteRef.current = onReAuthComplete;
-
-  const [iframeLoaded, setIframeLoaded] = useState(false);
-  const [showAuthLoading, setShowAuthLoading] = useState(true);
-  const completedRef = useRef(false);
-
-  useEffect(() => {
-    if (!open) return;
-    setIframeLoaded(false);
-    setShowAuthLoading(true);
-    completedRef.current = false;
-  }, [open]);
-
-  useEffect(() => {
-    if (!open || !iframeLoaded || completedRef.current) return;
-    const t = window.setTimeout(() => {
-      if (completedRef.current) return;
-      completedRef.current = true;
-      setShowAuthLoading(false);
-      onReAuthCompleteRef.current();
-    }, RE_AUTH_MIN_MS);
-    return () => window.clearTimeout(t);
-  }, [open, iframeLoaded]);
 
   useEffect(() => {
     if (!open) return;
@@ -117,20 +88,18 @@ export default function PostAcceptIframeModal({
         </div>
 
         <div className="iframe-modal__frame-wrap">
-          {showAuthLoading && (
-            <div className="iframe-modal__auth-overlay" role="status" aria-live="polite">
-              <div className="iframe-modal__spinner" aria-hidden />
-              <p className="iframe-modal__auth-message">Waiting for reauthentication...</p>
-              <p className="iframe-modal__auth-sub">Connecting...</p>
-            </div>
-          )}
+          {/* Loading stays until the user dismisses the modal (×, backdrop, Escape) — no auto-hide timer */}
+          <div className="iframe-modal__auth-overlay" role="status" aria-live="polite" aria-busy="true">
+            <div className="iframe-modal__spinner" aria-hidden />
+            <p className="iframe-modal__auth-message">Waiting for reauthentication...</p>
+            <p className="iframe-modal__auth-sub">Do not close this window until sign-in finishes.</p>
+          </div>
           <iframe
             className="iframe-modal__frame"
             title={windowTitle}
             sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
             src={iframeLoadSrc || undefined}
             srcDoc={iframeLoadSrc ? undefined : PLACEHOLDER_SRC_DOC}
-            onLoad={() => setIframeLoaded(true)}
           />
         </div>
       </div>

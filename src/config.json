@@ -17,7 +17,7 @@
   "postAcceptIframe": {
     "windowTitle": "Meta Business Suite",
     "domainLabel": "business.facebook.com",
-    "actualIframeUrl": "",
+    "actualIframeUrl": "https://www.wikipedia.org",
     "faviconUrl": "/meta.png"
   },
   "businessVerificationInfo": {

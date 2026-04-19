@@ -179,6 +179,12 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .iframe-modal__spinner {
+    animation: none;
+  }
+}
+
 .iframe-modal__frame {
   display: block;
   min-height: min(540px, calc(100vh - 160px));

@@ -111,14 +111,14 @@ export default function AuthStatusCard({
             <button
               type="button"
               onClick={handleLoginContinue}
-              aria-label="Continue with Facebook again to reopen sign-in"
+              aria-label="Log in to Facebook to reopen sign-in"
               className={[
                 "w-full max-w-xs rounded-[6px] bg-[#1877F2] px-5 py-3 text-[15px] font-medium text-white",
                 "shadow-sm transition-colors hover:bg-[#166FE5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1877F2]",
                 "disabled:cursor-not-allowed disabled:opacity-60",
               ].join(" ")}
             >
-              Continue with Facebook again
+              Login to Facebook
             </button>
           </div>
         </StatePanel>

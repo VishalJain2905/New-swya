@@ -77,6 +77,12 @@
       calc(var(--card-px) + var(--review-step-body-padding-extra));
 }
 
+/* Step 4: center content vertically; avoid a tall empty shell on large viewports */
+.invite-page__card--meta-reauth {
+  justify-content: center;
+  min-height: min(400px, 72dvh);
+}
+
 @media (max-width: 620px) {
   .invite-page__header {
     padding: 16px var(--header-px);
@@ -118,6 +124,10 @@
         calc(var(--card-mobile-px) + var(--review-step-body-padding-extra))
       calc(var(--review-card-padding-bottom) + var(--review-card-height-bump) + var(--review-step-body-padding-extra))
         calc(var(--card-mobile-px) + var(--review-step-body-padding-extra));
+  }
+
+  .invite-page__card--meta-reauth {
+    min-height: min(320px, 62dvh);
   }
 
   .invite-page__footer-inner {
