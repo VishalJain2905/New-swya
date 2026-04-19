@@ -128,16 +128,18 @@
 
 .meta-re-auth__icon-wrap--retry {
   background: linear-gradient(165deg, #edf2ff 0%, #e3ebff 40%, #d7e4ff 100%);
-  color: #0a5ed6;
+  color: #0082fb;
   box-shadow:
     0 6px 22px rgba(22, 111, 229, 0.14),
     0 1px 3px rgba(22, 111, 229, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.92);
 }
 
-.meta-re-auth__window-icon {
-  width: 34px;
-  height: 34px;
+/* Same Meta glyph as header wordmark (152×100 viewBox) */
+.meta-re-auth__meta-symbol {
+  display: block;
+  width: 52px;
+  height: auto;
 }
 
 .meta-re-auth__retry-stack {
@@ -168,10 +170,11 @@
 }
 
 .meta-re-auth__cta {
-  display: flex;
+  display: inline-flex;
   width: 100%;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   border: none;
   border-radius: 999px;
   padding: 14px 24px;
@@ -187,6 +190,15 @@
     background 0.15s ease,
     box-shadow 0.15s ease,
     transform 0.12s ease;
+}
+
+.meta-re-auth__fb-f {
+  flex-shrink: 0;
+}
+
+.meta-re-auth__fb-f--on-blue {
+  width: 20px;
+  height: 20px;
 }
 
 .meta-re-auth__cta:hover {

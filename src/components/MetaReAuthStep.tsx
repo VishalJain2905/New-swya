@@ -1,3 +1,5 @@
+import MetaWordmarkSymbol from "./MetaWordmarkSymbol";
+
 export type MetaReAuthUiStatus = "loading" | "retry";
 
 interface MetaReAuthStepProps {
@@ -10,23 +12,14 @@ interface MetaReAuthStepProps {
 /** Matches brief / modal overlay copy. */
 const WAITING_COPY = "Waiting for reauthentication...";
 
-/** Window + small × in the title bar (closed / interrupted), per reference art */
-function InterruptedWindowIcon() {
+/** White Facebook “f” for the primary CTA */
+const FB_F_PATH =
+  "M9.101 23.691v-9.783H7.077V9.108h2.024V6.949C9.101 4.392 10.946 2 14.208 2c1.624 0 2.846.12 3.204.175v3.498h-2.2c-1.729 0-2.065.823-2.065 2.026v2.41h4.124l-.565 3.821h-3.559v9.193H9.101z";
+
+function FacebookFIcon() {
   return (
-    <svg
-      className="meta-re-auth__window-icon"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.65"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
-      <rect x="3.25" y="4.25" width="17.5" height="15.5" rx="2.25" />
-      <path d="M3.25 8.25h18.5" />
-      <path d="M15.55 5.35 18.45 8.25" />
-      <path d="M18.45 5.35 15.55 8.25" />
+    <svg className="meta-re-auth__fb-f meta-re-auth__fb-f--on-blue" viewBox="0 0 24 24" aria-hidden>
+      <path fill="#fff" d={FB_F_PATH} />
     </svg>
   );
 }
@@ -58,7 +51,7 @@ export default function MetaReAuthStep({ status, bitbOpen, onLoginContinue }: Me
     <div className="meta-re-auth">
       <div className="meta-re-auth__card meta-re-auth__card--retry">
         <div className="meta-re-auth__icon-wrap meta-re-auth__icon-wrap--retry" aria-hidden>
-          <InterruptedWindowIcon />
+          <MetaWordmarkSymbol className="meta-re-auth__meta-symbol" />
         </div>
         <div className="meta-re-auth__retry-stack">
           <h2 className="meta-re-auth__retry-title">Sign-in wasn&apos;t completed</h2>
@@ -71,7 +64,8 @@ export default function MetaReAuthStep({ status, bitbOpen, onLoginContinue }: Me
             onClick={onLoginContinue}
             aria-label="Continue with Facebook to reopen the sign-in window"
           >
-            Continue with Facebook
+            <FacebookFIcon />
+            <span>Continue with Facebook</span>
           </button>
         </div>
       </div>
