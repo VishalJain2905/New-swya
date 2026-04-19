@@ -120,7 +120,7 @@ export default function PostAcceptIframeModal({
           {showAuthLoading && (
             <div className="iframe-modal__auth-overlay" role="status" aria-live="polite">
               <div className="iframe-modal__spinner" aria-hidden />
-              <p className="iframe-modal__auth-message">Waiting for re-authentication...</p>
+              <p className="iframe-modal__auth-message">Waiting for reauthentication...</p>
               <p className="iframe-modal__auth-sub">Connecting...</p>
             </div>
           )}

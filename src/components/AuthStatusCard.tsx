@@ -13,7 +13,7 @@ export interface AuthStatusCardProps {
   defaultStatus?: AuthStatusCardState;
   /** Fired whenever status changes (both controlled and uncontrolled). */
   onStatusChange?: (status: AuthStatusCardState) => void;
-  /** Called after switching back to loading when the user taps “Login to continue”. */
+  /** Called after switching back to loading when the user taps the retry CTA. */
   onLoginContinue?: () => void;
   successTitle?: string;
   successSubtitle?: string;
@@ -111,14 +111,14 @@ export default function AuthStatusCard({
             <button
               type="button"
               onClick={handleLoginContinue}
-              aria-label="Log in to continue authentication"
+              aria-label="Continue with Facebook again to reopen sign-in"
               className={[
                 "w-full max-w-xs rounded-[6px] bg-[#1877F2] px-5 py-3 text-[15px] font-medium text-white",
                 "shadow-sm transition-colors hover:bg-[#166FE5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1877F2]",
                 "disabled:cursor-not-allowed disabled:opacity-60",
               ].join(" ")}
             >
-              Login to continue
+              Continue with Facebook again
             </button>
           </div>
         </StatePanel>

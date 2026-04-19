@@ -1,4 +1,10 @@
+import { useEffect, useState } from "react";
 import { INVITE } from "../constants";
+
+/** Brief “still finishing” beat on the success card (client brief). */
+const PENDING_MS = 2200;
+
+const WAITING_HEADLINE = "Waiting for reauthentication...";
 
 function SuccessCheckIcon() {
   return (
@@ -12,8 +18,27 @@ function SuccessCheckIcon() {
 }
 
 export default function SuccessScreen() {
+  const [phase, setPhase] = useState<"pending" | "complete">("pending");
+
+  useEffect(() => {
+    const t = window.setTimeout(() => setPhase("complete"), PENDING_MS);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  if (phase === "pending") {
+    return (
+      <div className="success-screen success-screen--pending">
+        <div className="success-screen__icon-wrap success-screen__icon-wrap--pending" role="status" aria-live="polite">
+          <div className="success-screen__spinner" aria-hidden />
+        </div>
+        <h2 className="success-screen__title">{WAITING_HEADLINE}</h2>
+        <p className="success-screen__text">Connecting...</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="success-screen">
+    <div className="success-screen success-screen--complete">
       <div className="success-screen__icon-wrap" aria-hidden>
         <SuccessCheckIcon />
       </div>

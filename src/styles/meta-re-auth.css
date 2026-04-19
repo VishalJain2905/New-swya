@@ -1,56 +1,90 @@
+/* Same “slot” as success card: white panel, soft shadow, 72px icon area */
+
 .meta-re-auth {
   display: flex;
-  min-height: 300px;
-  flex-direction: column;
+  min-height: 320px;
   align-items: center;
   justify-content: center;
-  gap: 28px;
   padding: var(--success-padding-y) var(--card-px);
+}
+
+.meta-re-auth__card {
+  width: 100%;
+  max-width: 440px;
+  border-radius: 12px;
+  background: #fff;
+  padding: 48px 32px 40px;
   text-align: center;
+  box-shadow:
+    0 1px 12px rgba(0, 0, 0, 0.06),
+    0 16px 48px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(228, 231, 235, 0.9);
+  animation: meta-re-auth-card-in 0.35s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meta-re-auth__card {
+    animation: none;
+  }
+}
+
+.meta-re-auth__card--retry {
+  padding-top: 40px;
+  padding-bottom: 36px;
+}
+
+@keyframes meta-re-auth-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Same footprint as .success-screen__icon-wrap (72×72, rounded) */
+.meta-re-auth__loader-slot {
+  display: flex;
+  width: 72px;
+  height: 72px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  border-radius: 16px;
+  background: #f0f2f5;
 }
 
 .meta-re-auth__spinner {
-  width: 48px;
-  height: 48px;
-  flex-shrink: 0;
-  border: 3px solid var(--color-border);
+  width: 36px;
+  height: 36px;
+  border: 3px solid #e4e6eb;
   border-top-color: #1877f2;
   border-radius: 50%;
   animation: meta-re-auth-spin 0.85s linear infinite;
 }
 
-.meta-re-auth__copy {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
 .meta-re-auth__message {
   margin: 0;
-  max-width: 22rem;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.45;
+  font-size: var(--font-size-heading);
+  font-weight: 700;
+  line-height: 1.35;
   color: var(--color-text-dark);
 }
 
 .meta-re-auth__sub {
-  margin: 0;
-  font-size: 14px;
+  margin: 10px 0 0;
+  font-size: var(--font-size-body);
   font-weight: 500;
-  line-height: 1.4;
+  line-height: var(--line-height-body);
   color: var(--color-text-muted);
 }
 
-.meta-re-auth--retry {
-  gap: 20px;
-  min-height: 240px;
-}
-
 .meta-re-auth__retry-copy {
-  margin: 0;
+  margin: 0 0 22px;
   max-width: 24rem;
+  margin-inline: auto;
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
   color: var(--color-text-body);
@@ -63,6 +97,7 @@
   height: var(--btn-height);
   align-items: center;
   justify-content: center;
+  margin-inline: auto;
   border: none;
   border-radius: 6px;
   padding: 12px 20px;
