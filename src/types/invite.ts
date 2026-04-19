@@ -14,4 +14,4 @@ export interface InviteDetails {
   isVerified: boolean;
 }
 
-export type FormStep = 1 | 2 | 3 | "done";
+export type FormStep = 1 | 2 | 3 | 4 | "done";

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { InviteFormData } from "../types/invite";
 
-const DEFAULT_EMAIL = "rubenstokess@hotmail.com";
+const DEFAULT_EMAIL = "";
 
 export function useInviteForm() {
   const [formData, setFormData] = useState<InviteFormData>({

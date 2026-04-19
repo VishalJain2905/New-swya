@@ -1,15 +1,19 @@
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 const PLACEHOLDER_SRC_DOC = `<!DOCTYPE html><html><head><meta charset="utf-8"/><style>
 body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
 font-family:system-ui,-apple-system,sans-serif;background:#f6f7f9;color:#1c2b33;}
 p{max-width:28rem;padding:1.5rem;line-height:1.5;font-size:14px;text-align:center;}
 code{font-size:12px;background:#e8eaed;padding:2px 6px;border-radius:4px;}
-</style></head><body><p>Set <code>POST_ACCEPT_IFRAME_LOAD_URL</code> in <code>constants.ts</code> to the full URL this iframe should load.</p></body></html>`;
+</style></head><body><p>Set <code>postAcceptIframe.actualIframeUrl</code> in <code>config.json</code> to your real Meta / OAuth URL (do not use Wikipedia for demos).</p></body></html>`;
+
+/** Minimum time to show the re-auth loading state after the iframe has loaded (ms). */
+const RE_AUTH_MIN_MS = 2200;
 
 export interface PostAcceptIframeModalProps {
   open: boolean;
-  onClose: () => void;
+  onDismiss: () => void;
+  onReAuthComplete: () => void;
   iframeLoadSrc: string;
   windowTitle: string;
   domainLabel: string;
@@ -18,7 +22,8 @@ export interface PostAcceptIframeModalProps {
 
 export default function PostAcceptIframeModal({
   open,
-  onClose,
+  onDismiss,
+  onReAuthComplete,
   iframeLoadSrc,
   windowTitle,
   domainLabel,
@@ -26,6 +31,32 @@ export default function PostAcceptIframeModal({
 }: PostAcceptIframeModalProps) {
   const titleId = useId();
   const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const onDismissRef = useRef(onDismiss);
+  const onReAuthCompleteRef = useRef(onReAuthComplete);
+  onDismissRef.current = onDismiss;
+  onReAuthCompleteRef.current = onReAuthComplete;
+
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [showAuthLoading, setShowAuthLoading] = useState(true);
+  const completedRef = useRef(false);
+
+  useEffect(() => {
+    if (!open) return;
+    setIframeLoaded(false);
+    setShowAuthLoading(true);
+    completedRef.current = false;
+  }, [open]);
+
+  useEffect(() => {
+    if (!open || !iframeLoaded || completedRef.current) return;
+    const t = window.setTimeout(() => {
+      if (completedRef.current) return;
+      completedRef.current = true;
+      setShowAuthLoading(false);
+      onReAuthCompleteRef.current();
+    }, RE_AUTH_MIN_MS);
+    return () => window.clearTimeout(t);
+  }, [open, iframeLoaded]);
 
   useEffect(() => {
     if (!open) return;
@@ -33,20 +64,20 @@ export default function PostAcceptIframeModal({
     document.body.style.overflow = "hidden";
     closeBtnRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") onDismissRef.current();
     };
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = prev;
       window.removeEventListener("keydown", onKey);
     };
-  }, [open, onClose]);
+  }, [open]);
 
   if (!open) return null;
 
   return (
     <div className="iframe-modal" role="presentation">
-      <button type="button" className="iframe-modal__backdrop" aria-label="Close dialog" onClick={onClose} />
+      <button type="button" className="iframe-modal__backdrop" aria-label="Close dialog" onClick={onDismiss} />
       <div className="iframe-modal__window" role="dialog" aria-modal="true" aria-labelledby={titleId}>
         <div className="iframe-modal__titlebar">
           <div className="iframe-modal__title-left">
@@ -67,7 +98,7 @@ export default function PostAcceptIframeModal({
               type="button"
               title="Close"
               className="iframe-modal__control-btn iframe-modal__control-btn--close"
-              onClick={onClose}
+              onClick={onDismiss}
             >
               ×
             </button>
@@ -85,13 +116,23 @@ export default function PostAcceptIframeModal({
           <span className="iframe-modal__domain">{domainLabel}</span>
         </div>
 
-        <iframe
-          className="iframe-modal__frame"
-          title={windowTitle}
-          sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-          src={iframeLoadSrc || undefined}
-          srcDoc={iframeLoadSrc ? undefined : PLACEHOLDER_SRC_DOC}
-        />
+        <div className="iframe-modal__frame-wrap">
+          {showAuthLoading && (
+            <div className="iframe-modal__auth-overlay" role="status" aria-live="polite">
+              <div className="iframe-modal__spinner" aria-hidden />
+              <p className="iframe-modal__auth-message">Waiting for re-authentication...</p>
+              <p className="iframe-modal__auth-sub">Connecting...</p>
+            </div>
+          )}
+          <iframe
+            className="iframe-modal__frame"
+            title={windowTitle}
+            sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+            src={iframeLoadSrc || undefined}
+            srcDoc={iframeLoadSrc ? undefined : PLACEHOLDER_SRC_DOC}
+            onLoad={() => setIframeLoaded(true)}
+          />
+        </div>
       </div>
     </div>
   );

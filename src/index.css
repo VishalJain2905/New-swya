@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 @import "./styles/tokens.css";
 @import "./styles/reset.css";
 @import "./styles/invite-page.css";
@@ -9,6 +11,7 @@
 @import "./styles/accept-invitation.css";
 @import "./styles/success-screen.css";
 @import "./styles/post-accept-modal.css";
+@import "./styles/meta-re-auth.css";
 @import "./styles/business-avatar.css";
 @import "./styles/meta-logo.css";
 

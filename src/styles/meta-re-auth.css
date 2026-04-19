@@ -1,0 +1,89 @@
+.meta-re-auth {
+  display: flex;
+  min-height: 300px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: var(--success-padding-y) var(--card-px);
+  text-align: center;
+}
+
+.meta-re-auth__spinner {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border: 3px solid var(--color-border);
+  border-top-color: #1877f2;
+  border-radius: 50%;
+  animation: meta-re-auth-spin 0.85s linear infinite;
+}
+
+.meta-re-auth__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.meta-re-auth__message {
+  margin: 0;
+  max-width: 22rem;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--color-text-dark);
+}
+
+.meta-re-auth__sub {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+.meta-re-auth--retry {
+  gap: 20px;
+  min-height: 240px;
+}
+
+.meta-re-auth__retry-copy {
+  margin: 0;
+  max-width: 24rem;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text-body);
+}
+
+.meta-re-auth__cta {
+  display: flex;
+  width: 100%;
+  max-width: 320px;
+  height: var(--btn-height);
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: #1877f2;
+  cursor: pointer;
+}
+
+.meta-re-auth__cta:hover {
+  background: #166fe5;
+}
+
+.meta-re-auth__cta:focus-visible {
+  outline: 2px solid #1877f2;
+  outline-offset: 2px;
+}
+
+@keyframes meta-re-auth-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

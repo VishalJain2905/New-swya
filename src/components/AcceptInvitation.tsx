@@ -42,6 +42,7 @@ export default function AcceptInvitation({ userName, userEmail, onPrev, onAccept
         onContinue={onAccept}
         onPrevious={onPrev}
         nextLabel="Accept invitation"
+        primaryTone="facebook"
       />
     </div>
   );

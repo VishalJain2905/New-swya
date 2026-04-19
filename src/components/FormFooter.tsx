@@ -5,6 +5,7 @@ interface FormFooterProps {
   onPrevious?: () => void;
   nextLabel?: string;
   isDisabled?: boolean;
+  primaryTone?: "default" | "facebook";
 }
 
 function ChevronLeft() {
@@ -30,6 +31,7 @@ export default function FormFooter({
   onPrevious,
   nextLabel = "Continue",
   isDisabled = false,
+  primaryTone = "default",
 }: FormFooterProps) {
   const stepLabel = (
     <span className="form-footer__step">
@@ -42,7 +44,13 @@ export default function FormFooter({
       type="button"
       onClick={onContinue}
       disabled={isDisabled}
-      className="form-footer__btn form-footer__btn--primary"
+      className={[
+        "form-footer__btn",
+        "form-footer__btn--primary",
+        primaryTone === "facebook" ? "form-footer__btn--primary-facebook" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
     >
       {nextLabel}
       {nextLabel === "Continue" && <ChevronRight />}

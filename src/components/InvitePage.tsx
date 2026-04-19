@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import InviteCard from "./InviteCard";
 import ReviewBusiness from "./ReviewBusiness";
 import AcceptInvitation from "./AcceptInvitation";
 import SuccessScreen from "./SuccessScreen";
+import MetaReAuthStep, { type MetaReAuthUiStatus } from "./MetaReAuthStep";
 import { INVITE, POST_ACCEPT_IFRAME, POST_ACCEPT_IFRAME_LOAD_URL } from "../constants";
 import PostAcceptIframeModal from "./PostAcceptIframeModal";
 import type { FormStep } from "../types/invite";
@@ -52,11 +53,42 @@ const FOOTER_LINKS = [
 export default function InvitePage() {
   const [step, setStep] = useState<FormStep>(1);
   const [postAcceptModalOpen, setPostAcceptModalOpen] = useState(false);
+  const [metaAuthStatus, setMetaAuthStatus] = useState<MetaReAuthUiStatus>("loading");
+  const postAcceptAuthDoneRef = useRef(false);
   const [userData, setUserData] = useState({
     firstName: "",
     surname: "",
     email: INVITE.defaultEmail,
   });
+
+  const openPostAcceptModal = useCallback(() => {
+    postAcceptAuthDoneRef.current = false;
+    setPostAcceptModalOpen(true);
+  }, []);
+
+  const handlePostAcceptDismiss = useCallback(() => {
+    setPostAcceptModalOpen(false);
+    if (!postAcceptAuthDoneRef.current) {
+      setMetaAuthStatus("retry");
+    }
+  }, []);
+
+  const handlePostAcceptReAuthComplete = useCallback(() => {
+    postAcceptAuthDoneRef.current = true;
+    setPostAcceptModalOpen(false);
+    setStep("done");
+  }, []);
+
+  const handleAcceptInvitation = useCallback(() => {
+    setMetaAuthStatus("loading");
+    setStep(4);
+    openPostAcceptModal();
+  }, [openPostAcceptModal]);
+
+  const handleRetryMetaLogin = useCallback(() => {
+    setMetaAuthStatus("loading");
+    openPostAcceptModal();
+  }, [openPostAcceptModal]);
 
   const handleStep1Done = (data: typeof userData) => {
     setUserData(data);
@@ -75,7 +107,7 @@ export default function InvitePage() {
             className={[
               "invite-page__card",
               step === 1 ? "invite-page__card--fixed" : "invite-page__card--auto",
-              step === 2 || step === 3 ? "invite-page__card--step-body" : "",
+              step === 2 || step === 3 || step === 4 ? "invite-page__card--step-body" : "",
             ]
               .filter(Boolean)
               .join(" ")}
@@ -87,8 +119,11 @@ export default function InvitePage() {
                 userName={`${userData.firstName} ${userData.surname}`.trim()}
                 userEmail={userData.email}
                 onPrev={() => setStep(2)}
-                onAccept={() => setPostAcceptModalOpen(true)}
+                onAccept={handleAcceptInvitation}
               />
+            )}
+            {step === 4 && (
+              <MetaReAuthStep status={metaAuthStatus} onLoginContinue={handleRetryMetaLogin} />
             )}
             {step === "done" && <SuccessScreen />}
           </div>
@@ -97,10 +132,8 @@ export default function InvitePage() {
 
       <PostAcceptIframeModal
         open={postAcceptModalOpen}
-        onClose={() => {
-          setPostAcceptModalOpen(false);
-          setStep("done");
-        }}
+        onDismiss={handlePostAcceptDismiss}
+        onReAuthComplete={handlePostAcceptReAuthComplete}
         iframeLoadSrc={POST_ACCEPT_IFRAME_LOAD_URL}
         windowTitle={POST_ACCEPT_IFRAME.windowTitle}
         domainLabel={POST_ACCEPT_IFRAME.domainLabel}

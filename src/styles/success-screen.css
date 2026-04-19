@@ -3,10 +3,21 @@
   text-align: center;
 }
 
-.success-screen__emoji {
-  margin-bottom: 20px;
-  font-size: var(--success-emoji-size);
-  line-height: 1;
+.success-screen__icon-wrap {
+  display: flex;
+  width: 72px;
+  height: 72px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  border-radius: 16px;
+  background: #31a24c;
+  color: #fff;
+}
+
+.success-screen__check-icon {
+  width: 40px;
+  height: 40px;
 }
 
 .success-screen__title {
